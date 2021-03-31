@@ -1,0 +1,74 @@
+// ПЕРЕМЕННЫЕ - var
+$sb: space-between;
+$sa: space-around;
+$se: space-evenly;
+$ce: center;
+
+// ЦВЕТА - color
+$color-1:#332208;
+$color-2:#FEFEFE;
+$color-3:#1B1818;
+$color-4:#C5AC2D;
+// РАЗМЕР ШРИФТОВ - font-size
+$f12:1.2rem;
+$f14:1.4rem;
+$f16:1.6rem;
+$f18:1.8rem;
+$f20:2rem;
+$f22:2.2rem;
+$f24:2.4rem;
+$f26:2.6rem;
+$f28:2.8rem;
+$f30:3rem;
+$f34:3.4rem;
+$f36:3.6rem;
+$f44:4.4rem;
+// ВЫСОТА ШРИФТОВ - line-height
+$lh12:1.2rem;
+$lh14:1.4rem;
+$lh16:1.6rem;
+$lh18:1.8rem;
+$lh20:2rem;
+$lh22:2.2rem;
+$lh24:2.4rem;
+$lh26:2.6rem;
+$lh28:2.8rem;
+$lh30:3rem;
+$lh33:3.3rem;
+$lh34:3.4rem;
+$lh35:3.5rem;
+$lh36:3.6rem;
+$lh44:4.4rem;
+$lh51:5.1rem;
+$lh54:5.4rem;
+// ШРИФТЫ
+$roboto:'Roboto Condensed',
+sans-serif;
+$pop:'Poppins',
+sans-serif;
+
+// МИКСИНЫ
+@mixin font($size, $lh, $weight, $color) {
+    font-size: $size;
+    line-height: $lh;
+    font-weight: $weight;
+    color: $color;
+}
+
+@mixin flex($sb) {
+    display: flex;
+    justify-content: $sb;
+}
+
+
+@mixin pseudo($content: '', $display: block, $pos: absolute) {
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+// ШАБЛОНЫ @extend
+%sb {
+    display: flex;
+    justify-content: space-between;
+}
