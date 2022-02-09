@@ -1,5 +1,5 @@
 "use strict";
-
+// active
 const {
     src,
     dest
@@ -9,7 +9,8 @@ const autoprefixer = require("gulp-autoprefixer");
 const cssbeautify = require("gulp-cssbeautify");
 const removeComments = require('gulp-strip-css-comments');
 const rename = require("gulp-rename");
-const sass = require("gulp-sass");
+const sass = require('gulp-sass')(require('sass'));
+// const sass = require('sass');
 const include = require("gulp-file-include");
 const htmlmin = require("gulp-htmlmin");
 const cssnano = require("gulp-cssnano");
@@ -17,32 +18,44 @@ const rigger = require("gulp-rigger");
 const uglify = require("gulp-uglify");
 const sourcemaps = require("gulp-sourcemaps");
 const plumber = require("gulp-plumber");
-const imagemin = require("gulp-imagemin");
+
+// images
+// const imagemin = require("gulp-imagemin");
+// const imgCompress = require("imagemin-jpeg-recompress");
+const webp = require("gulp-webp");
+const webphtml = require("gulp-webp-html");
+
+// fonts
+
+
 const del = require("del");
 const panini = require("panini");
-const pug = require("pug");
 const browsersync = require("browser-sync").create();
+// not active
+// const pug = require("pug");
+// const webpcss = require("gulp-webpcss");
+const svgSprite = require("gulp-svg-sprite");
 
 
 /* Paths */
 const path = {
     build: {
         html: "dist/",
-        js: "dist/assets/",
-        css: "dist/assets/",
+        js: "dist/assets/js",
+        css: "dist/assets/css",
         images: "dist/assets/img/"
     },
     src: {
         html: "src/*.html",
         js: "src/assets/js/*.js",
         css: "src/assets/sass/style.scss",
-        images: "src/assets/img/**/*.{jpg,png,svg,gif,ico}"
+        images: "src/assets/img/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml}"
     },
     watch: {
         html: "src/**/*.html",
         js: "src/assets/js/**/*.js",
         css: "src/assets/sass/**/*.scss",
-        images: "src/assets/img/**/*.{jpg,png,svg,gif,ico}"
+        images: "src/assets/img/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml}"
     },
     clean: "./dist"
 }
@@ -55,7 +68,7 @@ function browserSync(done) {
         server: {
             baseDir: "./dist/"
         },
-        port: 3000
+        port: 666
     });
 }
 
@@ -76,12 +89,13 @@ function html() {
             helpers: 'src/tpl/helpers/',
             data: 'src/tpl/data/'
         }))
+        .pipe(webphtml())
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
-        .pipe(include({
-            prefix: '@@'
-        }))
+        // .pipe(include({
+        //     prefix: '@@'
+        // }))
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream());
 }
@@ -92,12 +106,16 @@ function css() {
         })
         .pipe(sourcemaps.init())
         .pipe(plumber())
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
+        // .pipe(sass())
         .pipe(autoprefixer({
             overrideBrowserslist: ["last 5 versions"],
             cascade: false,
         }))
         .pipe(cssbeautify())
+
+        // поддержка webp в css. надо включить функцию в app.js
+        // .pipe(webpcss())
         .pipe(dest(path.build.css))
         .pipe(cssnano({
             zindex: false,
@@ -133,9 +151,35 @@ function js() {
 
 function images() {
     return src(path.src.images)
-        .pipe(imagemin())
+        .pipe(webp({
+            quality: 70
+        }))
+        .pipe(dest(path.build.images))
+        .pipe(src(path.src.images))
+        // .pipe(imagemin({
+        //     progressive: true,
+        //     svgoPlugins: [{
+        //         removeViewBox: false
+        //     }],
+        //     interlaced: true,
+        //     optimizationlevel: 3
+        // }))
         .pipe(dest(path.build.images));
 }
+
+// Для создания спрайтов, вызывается отдельно через gulp svgSprite
+gulp.task('svgSprite', function () {
+    return gulp.src(['src/assets/img/svg/sprites/*.svg'])
+        .pipe(svgSprite({
+            mode: {
+                stack: {
+                    sprite: "../svg/icons.svg",
+                    example: true
+                }
+            },
+        }))
+        .pipe(dest(path.build.images))
+})
 
 function clean() {
     return del(path.clean);
@@ -148,7 +192,7 @@ function watchFiles() {
     gulp.watch([path.watch.images], images);
 }
 
-const build = gulp.series(clean, gulp.parallel(html, css, js, images, print));
+const build = gulp.series(clean, gulp.parallel(html, css, js, images));
 const watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.html = html;

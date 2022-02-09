@@ -1,0 +1,153 @@
+@include mq(slg) {
+
+  // 1170(slg) 992(lg) 768(md) 576(sm) 320(xs)
+  .team {
+    &__items {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &__item {
+      &:hover {
+        background: rgba(0, 0, 0, .5);
+        transform: none;
+      }
+    }
+  }
+  
+  .table {
+      // display: none;
+
+      &__items {
+        // display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+      }
+
+      &__item {
+        margin: auto;
+        margin-bottom: 1rem;
+        background: rgba(0, 0, 0, .5);
+
+        &:hover {
+          transform: none;
+        }
+      }
+      
+  }
+}
+
+@include mq(lg) {
+  // 1170(slg) 992(lg) 768(md) 576(sm) 320(xs)
+
+  .team {
+    margin-bottom: 5rem;
+
+    &__items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &--name {
+      font-size: 1.6rem;
+    }
+  }
+  .footer {
+    // transform: translate(-50%);
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+
+@include mq(md) {
+
+  // 1170(slg) 992(lg) 768(md) 576(sm) 320(xs)
+  .team {
+    &__items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .header {
+    background: transparent;
+    margin-bottom: 2rem;
+  }
+
+  .menu {
+    &__list {
+      &-link {
+        &--active {
+          box-shadow: none;
+        }
+
+        &:hover {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .table {
+    margin-bottom: 5rem;
+  }
+}
+
+
+@include mq(sm) {
+
+  // 1170(slg) 992(lg) 768(md) 576(sm) 320(xs)
+  .header {
+    &__logo {
+      position: relative;
+      // left: 50%;
+      top: 0;
+      left: 30%;
+      // transform: translateX(-50%);
+      width: 40%;
+    }
+  }
+
+  .menu {
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1rem;
+
+      // flex-direction: column;
+      // justify-content: center;
+      // max-width: 20rem;
+      &-link {
+        padding: .5rem 2rem;
+      }
+    }
+
+    &__item {
+      margin: 0 auto;
+    }
+  }
+
+  .team {
+    &__items {
+      grid-template-columns: 1fr;
+    }
+
+    &__item {
+      &--name {
+        font-size: 2rem;
+      }
+    }
+  }
+
+}
+
+
+@include mq(xs) {
+
+  // 1170(slg) 992(lg) 768(md) 576(sm) 320(xs)
+  .hero {
+    &__items {}
+
+    &__title {
+      font-size: 2rem;
+    }
+  }}

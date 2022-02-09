@@ -1,0 +1,36 @@
+.footer{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-top: auto;
+  // width: 100%;
+  // position: fixed;
+  background: $color1;
+  opacity: .4;
+  transition: all .3s;
+  &:hover{
+    opacity: 1;
+  }
+  &__items{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  &__item{
+    &+&{
+      margin-left: 1rem;
+    }
+  }
+  &__text{
+    color: $color2;
+    font-size: 1.4rem;
+    
+    &:hover{
+      color: #be4e1a;
+    }
+  }
+&__git{
+  width: 3rem;
+}
+}

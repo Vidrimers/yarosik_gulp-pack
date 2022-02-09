@@ -1,0 +1,15 @@
+.hero {
+  padding-top: 10rem;
+
+  &__items {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+  }
+
+  &__title {
+    text-shadow: .1rem .1rem .5rem $color3;
+  }
+
+}

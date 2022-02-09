@@ -1,0 +1,57 @@
+.header {
+  background: #c52222;
+  width: 100%;
+  margin-bottom: 5rem;
+&__logo{
+  position: absolute;
+  // left: 50%;
+  top: 0;
+  width: 15%;
+}
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1.5rem 0;
+  }
+}
+
+
+.menu {
+
+  &__list {
+    display: flex;
+
+    &-link {
+      @include font($f12, $lh14, 500, $color1);
+      transition: all .3s;
+padding: .5rem 2rem;
+border: 1px solid $color1;
+
+&--active{
+  background: $color1;
+color: $color4;
+border: 1px solid $color3;
+box-shadow: .1rem .1rem .5rem $color2 inset;
+
+}
+
+      &:hover {
+// border: 1px solid $color2;
+background: $color1;
+color: $color4;
+box-shadow: .5rem .5rem 1rem $color2;
+
+        // border-bottom: .1rem solid #fff;
+        // padding-bottom: .7rem;
+      }
+    }
+  }
+
+  &__item {
+    margin-right: 2rem;
+
+    // width: 2rem;
+  }
+}

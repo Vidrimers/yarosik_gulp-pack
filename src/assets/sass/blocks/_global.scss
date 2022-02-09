@@ -1,0 +1,66 @@
+body {
+  background: url("../img/bg.jpg") no-repeat top center;
+  background-size: cover;
+  @include ff1;
+  @include font($f20, $lh23, 500, $color1);
+}
+.tabs__item{
+  display: none;
+}
+.tabs__item--active{
+  display: block;
+}
+.page{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  // justify-content: space-between;
+  position: relative;
+}
+
+img{
+  max-width: 100%;
+}
+
+a {
+  color: $color1;
+}
+
+.container {
+  max-width: 130rem;
+  padding: 0 1rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.btn {
+  display: inline-block;
+  background: $color2;
+  // width: 22rem;
+  // height: 5.5rem;
+  line-height: 4rem;
+  color: $color3;
+  text-align: center;
+
+  transition: color .3s;
+
+  &:hover {
+    // border: 1px solid $color2;
+    // background: transparent;
+    color: $color1;
+  }
+}
+
+.title {
+  // display: inline-block;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  @include font($f36, $lh42, 900, $color2);
+  // margin: 10rem auto 6rem;
+  text-align: center;
+  // max-width: 70rem;
+}
+.text{
+  @include font($f20, $lh23, normal, $color2);
+}
